@@ -13,7 +13,18 @@ export const options = {
 	},
 };
 
-const client = xk6_mongo.newClient(`mongodb://mongo-user:mongo-password@127.0.0.1:27017/admin?connect=direct&appName=loadtest`)
+const mongoUri = `mongodb://mongo-user:mongo-password@127.0.0.1:27017/admin?connect=direct`
+const clientOptions = {
+    "app_name": "MyApp",
+    //...
+    "server_api_options": {
+        "server_api_version": "1",
+        "strict": true
+    }
+    //...
+};
+const client = xk6_mongo.newClientWithOptions(mongoUri, clientOptions)
+
 const collectionName = "contact-projection"
 const dbName = "contact-martech"
 
